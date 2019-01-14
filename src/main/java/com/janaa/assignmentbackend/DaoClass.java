@@ -11,13 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DaoClass {
 
-	private USAIncomeRepository dao;
-
-	public DaoClass(USAIncomeRepository dao) {
-		super();
-		this.dao = dao;
-	}
-
 	@Autowired
 	private UsaIncomeDALImpl dal;
 
