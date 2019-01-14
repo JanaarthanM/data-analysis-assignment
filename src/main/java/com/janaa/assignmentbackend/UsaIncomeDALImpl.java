@@ -9,16 +9,29 @@ import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UsaIncomeDALImpl implements USAIncomeDAL{
+public class UsaIncomeDALImpl implements USAIncomeDAL {
 
 	@Autowired
 	private MongoTemplate mongoTemplate;
-	
+
+	public UsaIncomeDALImpl() {
+
+	}
+
+	public UsaIncomeDALImpl(MongoTemplate mongoTemplate) {
+		super();
+		this.mongoTemplate = mongoTemplate;
+	}
+
 	@Override
 	public List<USAIncome> getUsers(String queryString, Pageable pageable) {
 		BasicQuery query = new BasicQuery(queryString);
-		query.with(pageable);
-		return mongoTemplate.find(query, USAIncome.class);
+		if(pageable != null) {
+			query.with(pageable);
+			return mongoTemplate.find(query, USAIncome.class);
+		} else {
+			return null;
+		}
 	}
 
 }
